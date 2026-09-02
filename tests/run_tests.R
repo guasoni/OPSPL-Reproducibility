@@ -76,6 +76,10 @@ if (file.exists(launcher_path)) {
     grepl("dst=/optionmetrics,readonly", launcher, fixed = TRUE),
     "The WSL2 launcher must mount the licensed input directory read-only."
   )
+  check(
+    grepl("Rscript src/scripts/bootstrap.R", launcher, fixed = TRUE),
+    "The WSL2 launcher must restore locked packages before maintenance checks."
+  )
 }
 if (file.exists(dockerignore_path)) {
   dockerignore <- trimws(readLines(dockerignore_path, warn = FALSE, encoding = "UTF-8"))

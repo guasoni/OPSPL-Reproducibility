@@ -114,4 +114,8 @@ case "$operation" in
     ;;
 esac
 
+if [[ "$operation" != "reproduce" ]]; then
+  docker "${docker_arguments[@]}" "$image_name" Rscript src/scripts/bootstrap.R
+fi
+
 docker "${docker_arguments[@]}" "$image_name" "${command[@]}"
