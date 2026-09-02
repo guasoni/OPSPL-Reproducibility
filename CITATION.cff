@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "Please cite the related research article and the exact archived software release, as described in README.md."
+title: "Options Portfolio Selection with Position Limits: Reproduction Package"
+type: software
+version: "1.0.0"
+abstract: "An R-only workflow that constructs the paper's option samples from user-supplied OptionMetrics exports, reproduces the currently covered portfolio results, and validates them against declared numerical criteria."
+authors:
+  - family-names: Guasoni
+    given-names: Paolo
+  - family-names: Mayerhofer
+    given-names: Eberhard
+  - family-names: Zhao
+    given-names: Mingchuan
+repository-code: "https://github.com/guasoni/Option-Portfolio-Selection-Reproducibility"
+license: "BSD-3-Clause"
+keywords:
+  - option portfolios
+  - position limits
+  - portfolio optimization
+  - reproducibility
+  - R

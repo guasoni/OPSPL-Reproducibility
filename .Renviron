@@ -1,0 +1,10 @@
+# Keep renv's cache inside the project so the workflow also works on restricted
+# or containerized systems without a writable user-level cache directory.
+RENV_PATHS_CACHE=renv/cache
+RENV_PATHS_ROOT=renv/local
+RENV_CONFIG_SANDBOX_ENABLED=FALSE
+# Use the portable C locale for deterministic ordering and to avoid inheriting
+# host-specific locale names that are unavailable on another operating system.
+LANG=C
+LC_ALL=C
+LC_CTYPE=C

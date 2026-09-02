@@ -1,0 +1,49 @@
+name: Reproduction problem
+description: Report a problem without sharing licensed or row-level data.
+title: "[Reproduction]: "
+labels:
+  - reproduction
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a problem. Do not paste or attach OptionMetrics
+        observations, row-level derivatives, credentials, unrestricted logs, or
+        personal paths. Use the synthetic fixture whenever possible.
+  - type: dropdown
+    id: run_mode
+    attributes:
+      label: Run mode
+      options:
+        - Synthetic
+        - Paper-vintage
+        - Current-vintage
+        - Data-free tests
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: Describe the failed command or check and the expected behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Give the operating system, R version, repository version or commit, and package-restore status.
+    validations:
+      required: true
+  - type: textarea
+    id: safe_diagnostics
+    attributes:
+      label: Safe diagnostics
+      description: Include only aggregate dimensions, hashes, and sanitized messages. Do not include data rows or personal paths.
+  - type: checkboxes
+    id: data_confirmation
+    attributes:
+      label: Licensed-data confirmation
+      options:
+        - label: I have not included OptionMetrics observations, row-level derivatives, credentials, or personal paths.
+          required: true

@@ -1,0 +1,50 @@
+# Licensed or user-supplied raw data
+data/private_raw/*
+!data/private_raw/README.md
+
+# Licensed OptionMetrics exports and row-level derivatives are forbidden
+# anywhere in the public source tree, not only under data/private_raw.
+**/option_price_view_indices_2020.csv
+**/security_price_indices_through_2021_01.csv
+**/closing_prices_2020.csv
+**/zero_curve_through_2020.csv
+**/zero_curve_2020.csv
+**/SPXfinal.csv
+**/NDXfinal.csv
+**/DJXfinal.csv
+**/RUTfinal.csv
+**/optfinal.csv
+**/optfinal3.csv
+
+# Generated intermediates and results
+outputs/
+work/
+logs/
+
+# Local configuration and R state
+config/config.R
+.Rhistory
+.RData
+.Rproj.user/
+renv/library/
+renv/staging/
+renv/cache/
+renv/local/
+
+# Large or potentially restricted data accidentally placed elsewhere
+*.RData
+*.rds
+*.RDS
+*.parquet
+*.feather
+*.sas7bdat
+*.dta
+*.zip
+*.7z
+*.tar
+*.gz
+*.bz2
+
+# Operating-system files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,5 @@
+# The image contains only R and its system build dependencies. The checked-out
+# repository is mounted at runtime, so no research data or source tree is sent
+# to the Docker build context.
+**
+!Dockerfile

@@ -1,0 +1,10 @@
+metric,expected,tolerance
+SPX_unconstrained_return_sum,1.88703320012218,0.0000001
+SPX_solvency_return_sum,1.88703320012218,0.0000001
+SPX_small_return_sum,0.630288265317799,0.0000001
+SPX_midprice_return_sum,1.88717473073223,0.0000001
+NDX_unconstrained_return_sum,1.37138050961479,0.0000001
+NDX_solvency_return_sum,1.37138050961479,0.0000001
+DJX_unconstrained_return_sum,1.56251156475714,0.0000001
+DJX_solvency_return_sum,1.56251156475714,0.0000001
+SPX_step1_mean_midprice,113.277498204445,0.0000001

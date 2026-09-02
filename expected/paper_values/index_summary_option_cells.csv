@@ -1,0 +1,13 @@
+"ticker","statistic","paper","display_decimals"
+"SPX","atm_put_spread_pct",6.1,1
+"SPX","atm_call_spread_pct",6.1,1
+"SPX","min_moneyness",0.53,3
+"SPX","max_moneyness",1.256,3
+"NDX","atm_put_spread_pct",5,1
+"NDX","atm_call_spread_pct",4.7,1
+"NDX","min_moneyness",0.582,3
+"NDX","max_moneyness",1.245,3
+"DJX","atm_put_spread_pct",7.4,1
+"DJX","atm_call_spread_pct",7.3,1
+"DJX","min_moneyness",0.714,3
+"DJX","max_moneyness",1.151,3

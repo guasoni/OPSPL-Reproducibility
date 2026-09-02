@@ -1,0 +1,25 @@
+{
+  "title": "Options Portfolio Selection with Position Limits: Reproduction Package",
+  "description": "R-only computational workflow and validation materials for reproducing the currently covered empirical results in Options Portfolio Selection with Position Limits. Licensed OptionMetrics observations are not distributed and must be supplied by the user.",
+  "upload_type": "software",
+  "creators": [
+    {
+      "name": "Guasoni, Paolo"
+    },
+    {
+      "name": "Mayerhofer, Eberhard"
+    },
+    {
+      "name": "Zhao, Mingchuan"
+    }
+  ],
+  "license": "bsd-3-clause",
+  "version": "1.0.0",
+  "keywords": [
+    "option portfolios",
+    "position limits",
+    "portfolio optimization",
+    "reproducibility",
+    "R"
+  ]
+}

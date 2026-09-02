@@ -1,0 +1,10 @@
+exhibit_id,description,status,generated_output,validation_target
+main_performance,SPX NDX DJX unconstrained and solvency performance panels,covered,outputs/tables/all_performance_tables.csv,expected/paper_values/performance_cells.csv
+small_position,SPX analytical small-position-limit panel,covered,outputs/tables/SPX_small_position_performance.csv,expected/paper_values/performance_cells.csv
+margin_tables,SPX margin violation tables,covered,outputs/tables/SPX_margin_violation_comparison.csv,expected/paper_values/SPX_margin_cells.csv
+equivalent_safe_rate,Corrected ESR MVR SKR table,covered,outputs/tables/table_4_5_corrected.csv,expected/paper_values/table_4_5_final.csv
+five_year,SPX five-year performance panels,covered,outputs/tables/SPX_five_year_performance.csv,expected/paper_values/SPX_five_year_cells.csv
+effective_positions,Effective-position tables for all three indexes,covered,outputs/tables/effective_positions.csv,expected/paper_values/effective_position_cells.csv
+wealth_series,Underlying numerical series for three wealth figures,covered,outputs/wealth_series,expected/paper_values/wealth_endpoints.csv
+cross_index_summary,Option spread and moneyness cells,covered,outputs/tables/index_summary_option_statistics.csv,expected/paper_values/index_summary_option_cells.csv
+midprice_robustness,Corrected SPX midprice robustness table,covered,outputs/tables/SPX_midprice_performance.csv,expected/paper_values/SPX_midprice_corrected.csv

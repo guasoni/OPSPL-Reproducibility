@@ -1,0 +1,178 @@
+{
+  "R": {
+    "Version": "4.3.2",
+    "Repositories": [
+      {
+        "Name": "CRAN",
+        "URL": "https://cloud.r-project.org"
+      }
+    ]
+  },
+  "Packages": {
+    "data.table": {
+      "Package": "data.table",
+      "Version": "1.18.6.1",
+      "Source": "Repository",
+      "Title": "Extension of `data.frame`",
+      "Depends": [
+        "R (>= 3.4.0)"
+      ],
+      "Imports": [
+        "methods"
+      ],
+      "Suggests": [
+        "bit64 (>= 4.0.0)",
+        "bit (>= 4.0.4)",
+        "R.utils (>= 2.13.0)",
+        "xts",
+        "zoo (>= 1.8-1)",
+        "yaml",
+        "knitr",
+        "markdown"
+      ],
+      "Description": "Fast aggregation of large data (e.g. 100GB in RAM), fast ordered joins, fast add/modify/delete of columns by group using no copies at all, list columns, friendly and fast character-separated-value read/write. Offers a natural and flexible syntax, for faster development.",
+      "License": "MPL-2.0 | file LICENSE",
+      "URL": "https://r-datatable.com, https://Rdatatable.gitlab.io/data.table, https://github.com/Rdatatable/data.table",
+      "BugReports": "https://github.com/Rdatatable/data.table/issues",
+      "VignetteBuilder": "knitr",
+      "Encoding": "UTF-8",
+      "ByteCompile": "TRUE",
+      "Authors@R": "c( person(\"Tyson\",\"Barrett\",        role=c(\"aut\",\"cre\"), email=\"t.barrett88@gmail.com\", comment = c(ORCID=\"0000-0002-2137-1391\")), person(\"Matt\",\"Dowle\",           role=\"aut\",          email=\"mattjdowle@gmail.com\"), person(\"Arun\",\"Srinivasan\",      role=\"aut\",          email=\"asrini@pm.me\"), person(\"Jan\",\"Gorecki\",          role=\"aut\",          email=\"j.gorecki@wit.edu.pl\"), person(\"Michael\",\"Chirico\",      role=\"aut\",          email=\"michaelchirico4@gmail.com\", comment = c(ORCID=\"0000-0003-0787-087X\")), person(\"Toby\",\"Hocking\",         role=\"aut\",          email=\"toby.hocking@r-project.org\", comment = c(ORCID=\"0000-0002-3146-0865\")), person(\"Benjamin\",\"Schwendinger\",role=\"aut\", comment = c(ORCID=\"0000-0003-3315-8114\")), person(\"Ivan\", \"Krylov\",         role=\"aut\",          email=\"ikrylov@disroot.org\",   comment = c(ORCID=\"0000-0002-0172-3812\")), person(\"Pasha\",\"Stetsenko\",      role=\"ctb\"), person(\"Tom\",\"Short\",            role=\"ctb\"), person(\"Steve\",\"Lianoglou\",      role=\"ctb\"), person(\"Eduard\",\"Antonyan\",      role=\"ctb\"), person(\"Markus\",\"Bonsch\",        role=\"ctb\"), person(\"Hugh\",\"Parsonage\",       role=\"ctb\"), person(\"Scott\",\"Ritchie\",        role=\"ctb\"), person(\"Kun\",\"Ren\",              role=\"ctb\"), person(\"Xianying\",\"Tan\",         role=\"ctb\"), person(\"Rick\",\"Saporta\",         role=\"ctb\"), person(\"Otto\",\"Seiskari\",        role=\"ctb\"), person(\"Xianghui\",\"Dong\",        role=\"ctb\"), person(\"Michel\",\"Lang\",          role=\"ctb\"), person(\"Watal\",\"Iwasaki\",        role=\"ctb\"), person(\"Seth\",\"Wenchel\",         role=\"ctb\"), person(\"Karl\",\"Broman\",          role=\"ctb\"), person(\"Tobias\",\"Schmidt\",       role=\"ctb\"), person(\"David\",\"Arenburg\",       role=\"ctb\"), person(\"Ethan\",\"Smith\",          role=\"ctb\"), person(\"Francois\",\"Cocquemas\",   role=\"ctb\"), person(\"Matthieu\",\"Gomez\",       role=\"ctb\"), person(\"Philippe\",\"Chataignon\",  role=\"ctb\"), person(\"Nello\",\"Blaser\",         role=\"ctb\"), person(\"Dmitry\",\"Selivanov\",     role=\"ctb\"), person(\"Andrey\",\"Riabushenko\",   role=\"ctb\"), person(\"Cheng\",\"Lee\",            role=\"ctb\"), person(\"Declan\",\"Groves\",        role=\"ctb\"), person(\"Daniel\",\"Possenriede\",   role=\"ctb\"), person(\"Felipe\",\"Parages\",       role=\"ctb\"), person(\"Denes\",\"Toth\",           role=\"ctb\"), person(\"Mus\",\"Yaramaz-David\",    role=\"ctb\"), person(\"Ayappan\",\"Perumal\",      role=\"ctb\"), person(\"James\",\"Sams\",           role=\"ctb\"), person(\"Martin\",\"Morgan\",        role=\"ctb\"), person(\"Michael\",\"Quinn\",        role=\"ctb\"), person(given=\"@javrucebo\",       role=\"ctb\", comment=\"GitHub user\"), person(\"Marc\",\"Halperin\",        role=\"ctb\"), person(\"Roy\",\"Storey\",           role=\"ctb\"), person(\"Manish\",\"Saraswat\",      role=\"ctb\"), person(\"Morgan\",\"Jacob\",         role=\"ctb\"), person(\"Michael\",\"Schubmehl\",    role=\"ctb\"), person(\"Davis\",\"Vaughan\",        role=\"ctb\"), person(\"Leonardo\",\"Silvestri\",   role=\"ctb\"), person(\"Jim\",\"Hester\",           role=\"ctb\"), person(\"Anthony\",\"Damico\",       role=\"ctb\"), person(\"Sebastian\",\"Freundt\",    role=\"ctb\"), person(\"David\",\"Simons\",         role=\"ctb\"), person(\"Elliott\",\"Sales de Andrade\", role=\"ctb\"), person(\"Cole\",\"Miller\",          role=\"ctb\"), person(\"Jens Peder\",\"Meldgaard\", role=\"ctb\"), person(\"Vaclav\",\"Tlapak\",        role=\"ctb\"), person(\"Kevin\",\"Ushey\",          role=\"ctb\"), person(\"Dirk\",\"Eddelbuettel\",    role=\"ctb\"), person(\"Tony\",\"Fischetti\",       role=\"ctb\"), person(\"Ofek\",\"Shilon\",          role=\"ctb\"), person(\"Vadim\",\"Khotilovich\",    role=\"ctb\"), person(\"Hadley\",\"Wickham\",       role=\"ctb\"), person(\"Bennet\",\"Becker\",        role=\"ctb\"), person(\"Kyle\",\"Haynes\",          role=\"ctb\"), person(\"Boniface Christian\",\"Kamgang\", role=\"ctb\"), person(\"Olivier\",\"Delmarcell\",   role=\"ctb\"), person(\"Josh\",\"O'Brien\",         role=\"ctb\"), person(\"Dereck\",\"Mezquita\",      role=\"ctb\", comment = c(ORCID=\"0000-0002-9307-6762\")), person(\"Michael\",\"Czekanski\",    role=\"ctb\"), person(\"Dmitry\", \"Shemetov\",     role=\"ctb\"), person(\"Nitish\", \"Jha\",          role=\"ctb\"), person(\"Joshua\", \"Wu\",           role=\"ctb\"), person(\"Iago\", \"Gin<U+00E9>-V<U+00E1>zquez\",   role=\"ctb\"), person(\"Anirban\", \"Chetia\",      role=\"ctb\"), person(\"Doris\", \"Amoakohene\",    role=\"ctb\"), person(\"Angel\", \"Feliz\",         role=\"ctb\"), person(\"Michael\",\"Young\",        role=\"ctb\"), person(\"Mark\", \"Seeto\",          role=\"ctb\"), person(\"Philippe\", \"Grosjean\",   role=\"ctb\"), person(\"Vincent\", \"Runge\",       role=\"ctb\"), person(\"Christian\", \"Wia\",       role=\"ctb\"), person(\"Elise\", \"Maign<U+00E9>\",        role=\"ctb\"), person(\"Vincent\", \"Rocher\",      role=\"ctb\"), person(\"Vijay\", \"Lulla\",         role=\"ctb\"), person(\"Alja<U+017E>\", \"Sluga\",         role=\"ctb\"), person(\"Bill\", \"Evans\",          role=\"ctb\"), person(\"Reino\", \"Bruner\",        role=\"ctb\"), person(given=\"@badasahog\",       role=\"ctb\", comment=\"GitHub user\"), person(\"Vinit\", \"Thakur\",        role=\"ctb\"), person(\"Mukul\", \"Kumar\",         role=\"ctb\"), person(\"Ildik<U+00F3>\", \"Czeller\",      role=\"ctb\"), person(\"Manmita\", \"Das\",         role=\"ctb\"), person(\"Tarun\", \"Thammisetty\",   role=\"ctb\"), person(\"Marco\", \"Colombo\",       role=\"ctb\", comment = c(ORCID = \"0000-0001-6672-0623\")), person(\"Tim\", \"Taylor\",          role=\"ctb\", comment = c(ORCID = \"0000-0002-8587-7113\")) )",
+      "NeedsCompilation": "yes",
+      "Author": "Tyson Barrett [aut, cre] (ORCID: <https://orcid.org/0000-0002-2137-1391>), Matt Dowle [aut], Arun Srinivasan [aut], Jan Gorecki [aut], Michael Chirico [aut] (ORCID: <https://orcid.org/0000-0003-0787-087X>), Toby Hocking [aut] (ORCID: <https://orcid.org/0000-0002-3146-0865>), Benjamin Schwendinger [aut] (ORCID: <https://orcid.org/0000-0003-3315-8114>), Ivan Krylov [aut] (ORCID: <https://orcid.org/0000-0002-0172-3812>), Pasha Stetsenko [ctb], Tom Short [ctb], Steve Lianoglou [ctb], Eduard Antonyan [ctb], Markus Bonsch [ctb], Hugh Parsonage [ctb], Scott Ritchie [ctb], Kun Ren [ctb], Xianying Tan [ctb], Rick Saporta [ctb], Otto Seiskari [ctb], Xianghui Dong [ctb], Michel Lang [ctb], Watal Iwasaki [ctb], Seth Wenchel [ctb], Karl Broman [ctb], Tobias Schmidt [ctb], David Arenburg [ctb], Ethan Smith [ctb], Francois Cocquemas [ctb], Matthieu Gomez [ctb], Philippe Chataignon [ctb], Nello Blaser [ctb], Dmitry Selivanov [ctb], Andrey Riabushenko [ctb], Cheng Lee [ctb], Declan Groves [ctb], Daniel Possenriede [ctb], Felipe Parages [ctb], Denes Toth [ctb], Mus Yaramaz-David [ctb], Ayappan Perumal [ctb], James Sams [ctb], Martin Morgan [ctb], Michael Quinn [ctb], @javrucebo [ctb] (GitHub user), Marc Halperin [ctb], Roy Storey [ctb], Manish Saraswat [ctb], Morgan Jacob [ctb], Michael Schubmehl [ctb], Davis Vaughan [ctb], Leonardo Silvestri [ctb], Jim Hester [ctb], Anthony Damico [ctb], Sebastian Freundt [ctb], David Simons [ctb], Elliott Sales de Andrade [ctb], Cole Miller [ctb], Jens Peder Meldgaard [ctb], Vaclav Tlapak [ctb], Kevin Ushey [ctb], Dirk Eddelbuettel [ctb], Tony Fischetti [ctb], Ofek Shilon [ctb], Vadim Khotilovich [ctb], Hadley Wickham [ctb], Bennet Becker [ctb], Kyle Haynes [ctb], Boniface Christian Kamgang [ctb], Olivier Delmarcell [ctb], Josh O'Brien [ctb], Dereck Mezquita [ctb] (ORCID: <https://orcid.org/0000-0002-9307-6762>), Michael Czekanski [ctb], Dmitry Shemetov [ctb], Nitish Jha [ctb], Joshua Wu [ctb], Iago Gin<U+00E9>-V<U+00E1>zquez [ctb], Anirban Chetia [ctb], Doris Amoakohene [ctb], Angel Feliz [ctb], Michael Young [ctb], Mark Seeto [ctb], Philippe Grosjean [ctb], Vincent Runge [ctb], Christian Wia [ctb], Elise Maign<U+00E9> [ctb], Vincent Rocher [ctb], Vijay Lulla [ctb], Alja<U+017E> Sluga [ctb], Bill Evans [ctb], Reino Bruner [ctb], @badasahog [ctb] (GitHub user), Vinit Thakur [ctb], Mukul Kumar [ctb], Ildik<U+00F3> Czeller [ctb], Manmita Das [ctb], Tarun Thammisetty [ctb], Marco Colombo [ctb] (ORCID: <https://orcid.org/0000-0001-6672-0623>), Tim Taylor [ctb] (ORCID: <https://orcid.org/0000-0002-8587-7113>)",
+      "Maintainer": "Tyson Barrett <t.barrett88@gmail.com>",
+      "Repository": "CRAN"
+    },
+    "digest": {
+      "Package": "digest",
+      "Version": "0.6.39",
+      "Source": "Repository",
+      "Authors@R": "c(person(\"Dirk\", \"Eddelbuettel\", role = c(\"aut\", \"cre\"), email = \"edd@debian.org\", comment = c(ORCID = \"0000-0001-6419-907X\")), person(\"Antoine\", \"Lucas\", role=\"ctb\", comment = c(ORCID = \"0000-0002-8059-9767\")), person(\"Jarek\", \"Tuszynski\", role=\"ctb\"), person(\"Henrik\", \"Bengtsson\", role=\"ctb\", comment = c(ORCID = \"0000-0002-7579-5165\")), person(\"Simon\", \"Urbanek\", role=\"ctb\", comment = c(ORCID = \"0000-0003-2297-1732\")), person(\"Mario\", \"Frasca\", role=\"ctb\"), person(\"Bryan\", \"Lewis\", role=\"ctb\"), person(\"Murray\", \"Stokely\", role=\"ctb\"), person(\"Hannes\", \"Muehleisen\", role=\"ctb\", comment = c(ORCID = \"0000-0001-8552-0029\")), person(\"Duncan\", \"Murdoch\", role=\"ctb\"), person(\"Jim\", \"Hester\", role=\"ctb\", comment = c(ORCID = \"0000-0002-2739-7082\")), person(\"Wush\", \"Wu\", role=\"ctb\", comment = c(ORCID = \"0000-0001-5180-0567\")), person(\"Qiang\", \"Kou\", role=\"ctb\", comment = c(ORCID = \"0000-0001-6786-5453\")), person(\"Thierry\", \"Onkelinx\", role=\"ctb\", comment = c(ORCID = \"0000-0001-8804-4216\")), person(\"Michel\", \"Lang\", role=\"ctb\", comment = c(ORCID = \"0000-0001-9754-0393\")), person(\"Viliam\", \"Simko\", role=\"ctb\"), person(\"Kurt\", \"Hornik\", role=\"ctb\", comment = c(ORCID = \"0000-0003-4198-9911\")), person(\"Radford\", \"Neal\", role=\"ctb\", comment = c(ORCID = \"0000-0002-2473-3407\")), person(\"Kendon\", \"Bell\", role=\"ctb\", comment = c(ORCID = \"0000-0002-9093-8312\")), person(\"Matthew\", \"de Queljoe\", role=\"ctb\"), person(\"Dmitry\", \"Selivanov\", role=\"ctb\", comment = c(ORCID = \"0000-0003-0492-6647\")), person(\"Ion\", \"Suruceanu\", role=\"ctb\", comment = c(ORCID = \"0009-0005-6446-4909\")), person(\"Bill\", \"Denney\", role=\"ctb\", comment = c(ORCID = \"0000-0002-5759-428X\")), person(\"Dirk\", \"Schumacher\", role=\"ctb\"), person(\"Andr<U+00E1>s\", \"Svraka\", role=\"ctb\", comment = c(ORCID = \"0009-0008-8480-1329\")), person(\"Sergey\", \"Fedorov\", role=\"ctb\", comment = c(ORCID = \"0000-0002-5970-7233\")), person(\"Will\", \"Landau\", role=\"ctb\", comment = c(ORCID = \"0000-0003-1878-3253\")), person(\"Floris\", \"Vanderhaeghe\", role=\"ctb\", comment = c(ORCID = \"0000-0002-6378-6229\")), person(\"Kevin\", \"Tappe\", role=\"ctb\"), person(\"Harris\", \"McGehee\", role=\"ctb\"), person(\"Tim\", \"Mastny\", role=\"ctb\"), person(\"Aaron\", \"Peikert\", role=\"ctb\", comment = c(ORCID = \"0000-0001-7813-818X\")), person(\"Mark\", \"van der Loo\", role=\"ctb\", comment = c(ORCID = \"0000-0002-9807-4686\")), person(\"Chris\", \"Muir\", role=\"ctb\", comment = c(ORCID = \"0000-0003-2555-3878\")), person(\"Moritz\", \"Beller\", role=\"ctb\", comment = c(ORCID = \"0000-0003-4852-0526\")), person(\"Sebastian\", \"Campbell\", role=\"ctb\", comment = c(ORCID = \"0009-0000-5948-4503\")), person(\"Winston\", \"Chang\", role=\"ctb\", comment = c(ORCID = \"0000-0002-1576-2126\")), person(\"Dean\", \"Attali\", role=\"ctb\", comment = c(ORCID = \"0000-0002-5645-3493\")), person(\"Michael\", \"Chirico\", role=\"ctb\", comment = c(ORCID = \"0000-0003-0787-087X\")), person(\"Kevin\", \"Ushey\", role=\"ctb\", comment = c(ORCID = \"0000-0003-2880-7407\")), person(\"Carl\", \"Pearson\", role=\"ctb\", comment = c(ORCID = \"0000-0003-0701-7860\")))",
+      "Date": "2025-11-19",
+      "Title": "Create Compact Hash Digests of R Objects",
+      "Description": "Implementation of a function 'digest()' for the creation of hash digests of arbitrary R objects (using the 'md5', 'sha-1', 'sha-256', 'crc32', 'xxhash', 'murmurhash', 'spookyhash', 'blake3', 'crc32c', 'xxh3_64', and 'xxh3_128' algorithms) permitting easy comparison of R language objects, as well as functions such as 'hmac()' to create hash-based message authentication code. Please note that this package is not meant to be deployed for cryptographic purposes for which more comprehensive (and widely tested) libraries such as 'OpenSSL' should be used.",
+      "URL": "https://github.com/eddelbuettel/digest, https://eddelbuettel.github.io/digest/, https://dirk.eddelbuettel.com/code/digest.html",
+      "BugReports": "https://github.com/eddelbuettel/digest/issues",
+      "Depends": [
+        "R (>= 3.3.0)"
+      ],
+      "Imports": [
+        "utils"
+      ],
+      "License": "GPL (>= 2)",
+      "Suggests": [
+        "tinytest",
+        "simplermarkdown",
+        "rbenchmark"
+      ],
+      "VignetteBuilder": "simplermarkdown",
+      "Encoding": "UTF-8",
+      "NeedsCompilation": "yes",
+      "Author": "Dirk Eddelbuettel [aut, cre] (ORCID: <https://orcid.org/0000-0001-6419-907X>), Antoine Lucas [ctb] (ORCID: <https://orcid.org/0000-0002-8059-9767>), Jarek Tuszynski [ctb], Henrik Bengtsson [ctb] (ORCID: <https://orcid.org/0000-0002-7579-5165>), Simon Urbanek [ctb] (ORCID: <https://orcid.org/0000-0003-2297-1732>), Mario Frasca [ctb], Bryan Lewis [ctb], Murray Stokely [ctb], Hannes Muehleisen [ctb] (ORCID: <https://orcid.org/0000-0001-8552-0029>), Duncan Murdoch [ctb], Jim Hester [ctb] (ORCID: <https://orcid.org/0000-0002-2739-7082>), Wush Wu [ctb] (ORCID: <https://orcid.org/0000-0001-5180-0567>), Qiang Kou [ctb] (ORCID: <https://orcid.org/0000-0001-6786-5453>), Thierry Onkelinx [ctb] (ORCID: <https://orcid.org/0000-0001-8804-4216>), Michel Lang [ctb] (ORCID: <https://orcid.org/0000-0001-9754-0393>), Viliam Simko [ctb], Kurt Hornik [ctb] (ORCID: <https://orcid.org/0000-0003-4198-9911>), Radford Neal [ctb] (ORCID: <https://orcid.org/0000-0002-2473-3407>), Kendon Bell [ctb] (ORCID: <https://orcid.org/0000-0002-9093-8312>), Matthew de Queljoe [ctb], Dmitry Selivanov [ctb] (ORCID: <https://orcid.org/0000-0003-0492-6647>), Ion Suruceanu [ctb] (ORCID: <https://orcid.org/0009-0005-6446-4909>), Bill Denney [ctb] (ORCID: <https://orcid.org/0000-0002-5759-428X>), Dirk Schumacher [ctb], Andr<U+00E1>s Svraka [ctb] (ORCID: <https://orcid.org/0009-0008-8480-1329>), Sergey Fedorov [ctb] (ORCID: <https://orcid.org/0000-0002-5970-7233>), Will Landau [ctb] (ORCID: <https://orcid.org/0000-0003-1878-3253>), Floris Vanderhaeghe [ctb] (ORCID: <https://orcid.org/0000-0002-6378-6229>), Kevin Tappe [ctb], Harris McGehee [ctb], Tim Mastny [ctb], Aaron Peikert [ctb] (ORCID: <https://orcid.org/0000-0001-7813-818X>), Mark van der Loo [ctb] (ORCID: <https://orcid.org/0000-0002-9807-4686>), Chris Muir [ctb] (ORCID: <https://orcid.org/0000-0003-2555-3878>), Moritz Beller [ctb] (ORCID: <https://orcid.org/0000-0003-4852-0526>), Sebastian Campbell [ctb] (ORCID: <https://orcid.org/0009-0000-5948-4503>), Winston Chang [ctb] (ORCID: <https://orcid.org/0000-0002-1576-2126>), Dean Attali [ctb] (ORCID: <https://orcid.org/0000-0002-5645-3493>), Michael Chirico [ctb] (ORCID: <https://orcid.org/0000-0003-0787-087X>), Kevin Ushey [ctb] (ORCID: <https://orcid.org/0000-0003-2880-7407>), Carl Pearson [ctb] (ORCID: <https://orcid.org/0000-0003-0701-7860>)",
+      "Maintainer": "Dirk Eddelbuettel <edd@debian.org>",
+      "Repository": "CRAN"
+    },
+    "jsonlite": {
+      "Package": "jsonlite",
+      "Version": "2.0.0",
+      "Source": "Repository",
+      "Title": "A Simple and Robust JSON Parser and Generator for R",
+      "License": "MIT + file LICENSE",
+      "Depends": [
+        "methods"
+      ],
+      "Authors@R": "c( person(\"Jeroen\", \"Ooms\", role = c(\"aut\", \"cre\"), email = \"jeroenooms@gmail.com\", comment = c(ORCID = \"0000-0002-4035-0289\")), person(\"Duncan\", \"Temple Lang\", role = \"ctb\"), person(\"Lloyd\", \"Hilaiel\", role = \"cph\", comment=\"author of bundled libyajl\"))",
+      "URL": "https://jeroen.r-universe.dev/jsonlite https://arxiv.org/abs/1403.2805",
+      "BugReports": "https://github.com/jeroen/jsonlite/issues",
+      "Maintainer": "Jeroen Ooms <jeroenooms@gmail.com>",
+      "VignetteBuilder": "knitr, R.rsp",
+      "Description": "A reasonably fast JSON parser and generator, optimized for statistical  data and the web. Offers simple, flexible tools for working with JSON in R, and is particularly powerful for building pipelines and interacting with a web API.  The implementation is based on the mapping described in the vignette (Ooms, 2014). In addition to converting JSON data from/to R objects, 'jsonlite' contains  functions to stream, validate, and prettify JSON data. The unit tests included  with the package verify that all edge cases are encoded and decoded consistently  for use with dynamic data in systems and applications.",
+      "Suggests": [
+        "httr",
+        "vctrs",
+        "testthat",
+        "knitr",
+        "rmarkdown",
+        "R.rsp",
+        "sf"
+      ],
+      "RoxygenNote": "7.3.2",
+      "Encoding": "UTF-8",
+      "NeedsCompilation": "yes",
+      "Author": "Jeroen Ooms [aut, cre] (<https://orcid.org/0000-0002-4035-0289>), Duncan Temple Lang [ctb], Lloyd Hilaiel [cph] (author of bundled libyajl)",
+      "Repository": "CRAN"
+    },
+    "quadprog": {
+      "Package": "quadprog",
+      "Version": "1.5-8",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Functions to Solve Quadratic Programming Problems",
+      "Date": "2019-11-20",
+      "Author": "S original by Berwin A. Turlach <Berwin.Turlach@gmail.com>  R port by Andreas Weingessel <Andreas.Weingessel@ci.tuwien.ac.at> Fortran contributions from Cleve Moler (dposl/LINPACK and (a modified version of) dpodi/LINPACK)",
+      "Maintainer": "Berwin A. Turlach <Berwin.Turlach@gmail.com>",
+      "Description": "This package contains routines and documentation for solving quadratic programming problems.",
+      "Depends": [
+        "R (>= 3.1.0)"
+      ],
+      "License": "GPL (>= 2)",
+      "NeedsCompilation": "yes",
+      "Repository": "CRAN"
+    },
+    "renv": {
+      "Package": "renv",
+      "Version": "1.2.4",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Project Environments",
+      "Authors@R": "c( person(\"Kevin\", \"Ushey\", role = c(\"aut\", \"cre\"), email = \"kevin@rstudio.com\", comment = c(ORCID = \"0000-0003-2880-7407\")), person(\"Hadley\", \"Wickham\", role = c(\"aut\"), email = \"hadley@rstudio.com\", comment = c(ORCID = \"0000-0003-4757-117X\")), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\")) )",
+      "Description": "A dependency management toolkit for R. Using 'renv', you can create and manage project-local R libraries, save the state of these libraries to a 'lockfile', and later restore your library as required. Together, these tools can help make your projects more isolated, portable, and reproducible.",
+      "License": "MIT + file LICENSE",
+      "URL": "https://rstudio.github.io/renv/, https://github.com/rstudio/renv",
+      "BugReports": "https://github.com/rstudio/renv/issues",
+      "Imports": [
+        "utils"
+      ],
+      "Suggests": [
+        "BiocManager",
+        "cli",
+        "compiler",
+        "covr",
+        "cpp11",
+        "curl",
+        "devtools",
+        "generics",
+        "gitcreds",
+        "jsonlite",
+        "jsonvalidate",
+        "knitr",
+        "miniUI",
+        "modules",
+        "packrat",
+        "pak",
+        "R6",
+        "remotes",
+        "reticulate",
+        "rmarkdown",
+        "rstudioapi",
+        "shiny",
+        "testthat",
+        "uuid",
+        "waldo",
+        "yaml",
+        "webfakes"
+      ],
+      "Encoding": "UTF-8",
+      "VignetteBuilder": "knitr",
+      "Config/Needs/website": "tidyverse/tidytemplate",
+      "Config/testthat/edition": "3",
+      "Config/testthat/parallel": "true",
+      "Config/testthat/start-first": "bioconductor,python,install,restore,snapshot,retrieve,remotes",
+      "Config/roxygen2/version": "8.0.0",
+      "NeedsCompilation": "no",
+      "Author": "Kevin Ushey [aut, cre] (ORCID: <https://orcid.org/0000-0003-2880-7407>), Hadley Wickham [aut] (ORCID: <https://orcid.org/0000-0003-4757-117X>), Posit Software, PBC [cph, fnd]",
+      "Maintainer": "Kevin Ushey <kevin@rstudio.com>",
+      "Repository": "CRAN"
+    }
+  }
+}

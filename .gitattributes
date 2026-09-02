@@ -1,0 +1,22 @@
+* text=auto
+.gitattributes text eol=lf
+.gitignore text eol=lf
+.Renviron text eol=lf
+.Rprofile text eol=lf
+*.R text eol=lf
+*.md text eol=lf
+# CSV inputs are fingerprinted byte-for-byte. Git must neither convert nor diff
+# their line endings; the files remain ordinary CSV for R and spreadsheet tools.
+*.csv binary
+*.sql text eol=lf
+*.json text eol=lf
+*.lock text eol=lf
+*.cff text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.sh text eol=lf
+Dockerfile text eol=lf
+# This generated bootstrap file is synchronized byte-for-byte from renv 1.2.4;
+# upstream indents otherwise blank lines, which should not be reported as a
+# repository whitespace defect.
+renv/activate.R -whitespace
