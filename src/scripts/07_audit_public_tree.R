@@ -49,15 +49,20 @@ read_raw_file <- function(path) {
 
 read_git_blob <- function(hash) {
   temporary <- tempfile("public-tree-blob-")
-  on.exit(unlink(temporary, force = TRUE), add = TRUE)
+  errors <- tempfile("public-tree-blob-errors-")
+  on.exit(unlink(c(temporary, errors), force = TRUE), add = TRUE)
   status <- suppressWarnings(system2(
     "git",
     c("-C", shQuote(root), "cat-file", "blob", hash),
     stdout = temporary,
-    stderr = TRUE
+    stderr = errors
   ))
   if (is.null(status) || !length(status)) status <- 0L
-  if (status != 0L) stop(sprintf("Could not read Git blob %s", hash))
+  status <- as.integer(status[[1L]])
+  if (is.na(status) || status != 0L) {
+    detail <- if (file.exists(errors)) paste(readLines(errors, warn = FALSE), collapse = " ") else ""
+    stop(sprintf("Could not read Git blob %s%s", hash, if (nzchar(detail)) paste0(": ", detail) else ""))
+  }
   read_raw_file(temporary)
 }
 
