@@ -1,7 +1,6 @@
 # Public-release checklist
 
-The repository remains a local release candidate until every required item below
-passes.
+This checklist records the release controls applied to the public repository.
 
 ## Reproduction
 
@@ -66,16 +65,16 @@ passes.
 - [x] Optional WSL2 container route pins R 4.3.2, mounts licensed inputs
       read-only, and excludes the repository and data from the build context.
 - [x] Exact second-computer commands and evidence requirements documented.
-- [ ] Windows and Linux checks pass on the staged private GitHub repository.
+- [x] Windows and Linux checks pass on the staged private GitHub repository.
 - [x] `v1.0.0` GitHub release metadata prepared without asserting a DOI or Zenodo
       deposit before either exists.
 - [ ] Citation metadata updated with the final journal citation and DOI.
 - [x] Licensed-data leak scan passes on the current staged release-candidate Git
       index.
-- [ ] Licensed-data and personal-path scans repeated after all final edits and on
+- [x] Licensed-data and personal-path scans repeated after all final edits and on
       the exact commit to be pushed.
-- [ ] Downloadable GitHub source archive inspected for the same data boundary.
-- [ ] Candidate first pushed to a private remote and all remote checks pass.
-- [ ] Public GitHub repository created only after the preceding checks pass.
+- [x] Downloadable GitHub source archive inspected for the same data boundary.
+- [x] Candidate first pushed to a private remote and all remote checks pass.
+- [x] Public GitHub repository created only after the preceding checks pass.
 - [ ] Optional archival DOI created later; intentionally not a condition for the
       JEF proof link or initial GitHub release.
