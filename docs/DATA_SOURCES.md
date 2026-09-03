@@ -87,6 +87,10 @@ is 2021-05-28. The local schema is `Date,VXD` and rows with FRED's missing-value
 marker are removed.
 The exact download request is
 `https://fred.stlouisfed.org/graph/fredgraph.csv?id=VXDCLS&cosd=1997-10-07&coed=2021-05-31`.
+The script first uses R's `libcurl` transport. If that transfer fails (including
+an HTTP/2 framing error), it automatically retries the same URL with the
+command-line `curl` client forced to HTTP/1.1 and records the successful
+transport in `work/auxiliary/acquisition_report.json`.
 
 The [official Cboe history file](https://cdn.cboe.com/api/global/us_indices/daily_prices/VXD_History.csv)
 currently begins only on 2009-09-18, so it cannot

@@ -172,11 +172,37 @@ if (source_only) {
     function(index) if (actual_exists[[index]]) sha256_file(actual_paths[[index]]) else NA_character_,
     character(1L)
   )
+  canonical <- lapply(
+    seq_along(actual_paths),
+    function(index) {
+      if (actual_exists[[index]]) canonical_csv_fingerprint(actual_paths[[index]]) else NULL
+    }
+  )
+  canonical_rows <- vapply(
+    canonical,
+    function(value) if (is.null(value)) NA_real_ else as.numeric(value$rows),
+    numeric(1L)
+  )
+  canonical_bytes <- vapply(
+    canonical,
+    function(value) if (is.null(value)) NA_real_ else as.numeric(value$bytes),
+    numeric(1L)
+  )
+  canonical_hashes <- vapply(
+    canonical,
+    function(value) if (is.null(value)) NA_character_ else as.character(value$sha256),
+    character(1L)
+  )
   matches <-
     actual_exists &
     as.numeric(actual_rows) == expected_step1$rows &
-    as.numeric(actual_bytes) == expected_step1$bytes &
-    tolower(actual_hashes) == tolower(expected_step1$sha256)
+    canonical_rows == expected_step1$rows &
+    canonical_bytes == expected_step1$canonical_bytes &
+    tolower(canonical_hashes) == tolower(expected_step1$canonical_sha256)
+  legacy_matches <-
+    actual_exists &
+    as.numeric(actual_bytes) == expected_step1$legacy_bytes &
+    tolower(actual_hashes) == tolower(expected_step1$legacy_sha256)
   if (identical(report$data_mode, "paper-vintage")) {
     expected_raw <- data.table::fread(
       file.path(root, "expected", "paper_vintage_raw_fingerprints.csv"),
@@ -203,7 +229,16 @@ if (source_only) {
         "raw inputs: ",
         paste(sprintf("%s sha256=%s", expected_raw$logical_file, raw_hashes), collapse = "; "),
         "; outputs: ",
-        paste(sprintf("%s rows=%s sha256=%s", expected_step1$file, actual_rows, actual_hashes), collapse = "; ")
+        paste(
+          sprintf(
+            "%s rows=%s canonical_sha256=%s legacy_byte_match=%s",
+            expected_step1$file,
+            actual_rows,
+            canonical_hashes,
+            legacy_matches
+          ),
+          collapse = "; "
+        )
       )
     )
   } else {
@@ -213,7 +248,10 @@ if (source_only) {
       all(actual_exists) && all(as.numeric(actual_rows) > 0) && all(as.numeric(missing_values) == 0),
       paste0(
         "Current-vintage outputs are complete and intentionally not compared with paper-vintage hashes. ",
-        paste(sprintf("%s rows=%s sha256=%s", expected_step1$file, actual_rows, actual_hashes), collapse = "; ")
+        paste(
+          sprintf("%s rows=%s canonical_sha256=%s", expected_step1$file, actual_rows, canonical_hashes),
+          collapse = "; "
+        )
       )
     )
   }

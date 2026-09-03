@@ -4,15 +4,14 @@ This repository is the clean reproduction package for **“Options Portfolio
 Selection with Position Limits”** by Paolo Guasoni, Eberhard Mayerhofer, and
 Mingchuan Zhao, accepted by the *Journal of Empirical Finance*.
 
-The package is being assembled from a completed forensic audit of the authors'
+The package was assembled from a completed forensic audit of the authors'
 original code. It is intentionally separate from that private repository and
 does not inherit its Git history.
 
 ## Scope and status
 
-This is the local `v1.0.0` release candidate. It is not yet the public archival release.
-The current target covers the central SPX, NDX, and DJX results already validated
-by the audit:
+Release `v1.0.0` covers the central SPX, NDX, and DJX results validated by the
+audit:
 
 - the main unconstrained and solvency-constrained performance panels;
 - the analytical small-position-limit panel;
@@ -31,11 +30,16 @@ The distinction between the reusable computational workflow and the fixed JEF
 replication profile is documented in
 [`docs/METHOD_REUSE.md`](docs/METHOD_REUSE.md). The repository is a research
 workflow and reproduction package, not a general-purpose investment product.
+The mathematical and computational definitions, with direct links to their R
+implementation, are in
+[`docs/METHOD_SPECIFICATION.md`](docs/METHOD_SPECIFICATION.md).
 
 The mapping from the audited authors' code to this clean implementation is in
 [`docs/CODE_PROVENANCE.md`](docs/CODE_PROVENANCE.md).
 The completed release-candidate checks and observed tolerances are in
 [`docs/VALIDATION.md`](docs/VALIDATION.md).
+The separate-machine reproduction is summarized in
+[`docs/CLEAN_MACHINE_REPORT.md`](docs/CLEAN_MACHINE_REPORT.md).
 The strict indexed-tree and Git-object review is recorded in
 [`docs/PROPRIETARY_DATA_AUDIT.md`](docs/PROPRIETARY_DATA_AUDIT.md).
 
@@ -56,9 +60,10 @@ Two data modes are supported:
 
 Historical vendor revisions may cause a current-vintage extraction to differ
 from the archived input. Both modes write the same paper-value comparisons.
-Paper-vintage mode additionally requires exact raw-input and Step 1 fingerprints;
-current-vintage mode records any vendor-vintage differences explicitly rather
-than misidentifying them as code failures. In either mode, the public auxiliary
+Paper-vintage mode additionally requires exact raw-input byte fingerprints and
+canonical Step 1 content fingerprints; current-vintage mode records any vendor-
+vintage differences explicitly rather than misidentifying them as code failures.
+In either mode, the public auxiliary
 series are retrieved from their sources and their run-specific fingerprints are
 recorded as `auxiliary_data_mode = "source-current"`; this label is separate from
 the OptionMetrics data mode.
@@ -81,9 +86,11 @@ available in machine-readable form at
 
 The R pipeline generates the Step 1 files locally from those extracts. The Step 1
 files, all later option-level intermediates, and all portfolio weights remain in
-ignored local directories. For the paper-vintage inputs, their row counts, byte
-sizes, and SHA-256 fingerprints are checked against
+ignored local directories. For the paper-vintage inputs, their row counts and
+canonical table-content SHA-256 fingerprints are checked against
 `expected/step1_paper_vintage_fingerprints.csv` without publishing the files.
+Historical byte hashes remain in that contract as provenance but are not a
+cross-platform release gate.
 
 The minimum Oxford-Man realized-volatility subset is the sole redistributed
 empirical auxiliary input. Yahoo observations, a long DJIA history, and VXD are
@@ -207,11 +214,13 @@ Rscript tests/run_tests.R
 ```
 
 The public continuous-integration configuration is set to run these checks and
-the full synthetic integration test on both Windows and Linux. The release
-candidate must also pass the clean-room protocol in
-[`docs/CLEAN_ROOM_REPLICATION.md`](docs/CLEAN_ROOM_REPLICATION.md) before it is
-made public. A clean-machine run by an original developer is identified as such;
-it is not described as an independent replication.
+the full synthetic integration test on both Windows and Linux. A complete
+licensed-data run was also performed on a separate WSL2 machine. It reproduced
+all covered empirical results and led to targeted portability hardening; the
+scope of the run and the fact that the final repairs were not followed by a
+second full optimization are stated in
+[`docs/CLEAN_MACHINE_REPORT.md`](docs/CLEAN_MACHINE_REPORT.md). It is not
+described as an independent replication.
 
 ## Repository layout
 
@@ -230,11 +239,14 @@ it is not described as an independent replication.
   forecast attachment, portfolios, tables, and figure data.
 - `src/scripts/06_validate_release.R`: numerical and public-release validation.
 - `src/scripts/07_audit_public_tree.R`: strict indexed-tree and Git-history data-boundary audit.
+- `src/scripts/generate_workflow_diagram.R`: reproducible workflow and graphical-abstract source.
 - `src/synthetic/`: deterministic fixture generation and integration validation.
 - `data/public/`: the minimal Oxford-Man subset with SHA-256 provenance.
 - `data/private_raw/`, `work/`, and `outputs/`: ignored local-only locations.
 - `expected/`: raw-input contracts, paper-vintage fingerprints, paper values,
   and exhibit coverage.
+- `docs/METHODSX_RESOURCE_MAP.md`: provisional mapping from the MethodsX article
+  template to the repository evidence.
 
 Contribution instructions, including the prohibition on attaching licensed data
 to issues or pull requests, are in [`CONTRIBUTING.md`](CONTRIBUTING.md).
@@ -247,10 +259,10 @@ to reproduce them. A planned companion methods article will describe the
 computational workflow and validation design; no citation for it is asserted
 before publication.
 
-Complete identifiers will be added after the JEF citation and Zenodo archive are
-available. Until then, cite the accepted article and report the repository
-version and Git commit. The permanent policy for article citations, GitHub tags,
-and Zenodo version and concept DOIs is in
+Complete identifiers will be added after the JEF citation is final and an
+archival deposit is created. Until then, cite the accepted article, GitHub
+release, and Git commit. The permanent policy for article citations, GitHub
+tags, and any later archival DOI is in
 [`docs/RELEASES_AND_CITATION.md`](docs/RELEASES_AND_CITATION.md).
 
 ## Licensing
@@ -265,6 +277,6 @@ The BSD license applies independently of any Creative Commons license selected
 for an associated journal article. The software release remains a software
 archive even when it is cited by a methods article.
 
-Release metadata are prepared for a `v1.0.0` GitHub release and permanent Zenodo
-archive. The DOI must be added to the citation metadata only after Zenodo creates
-it; no DOI is asserted in this local release candidate.
+Release metadata identify `v1.0.0`. No Zenodo deposit or DOI is asserted in this
+release; an archival DOI may be added later without changing the software
+license.

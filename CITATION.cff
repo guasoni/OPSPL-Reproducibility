@@ -11,7 +11,7 @@ authors:
     given-names: Eberhard
   - family-names: Zhao
     given-names: Mingchuan
-repository-code: "https://github.com/guasoni/Option-Portfolio-Selection-Reproducibility"
+repository-code: "https://github.com/guasoni/OPSPL-Reproducibility"
 license: "BSD-3-Clause"
 keywords:
   - option portfolios

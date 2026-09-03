@@ -181,10 +181,69 @@ fred_url <- paste0(
   "https://fred.stlouisfed.org/graph/fredgraph.csv",
   "?id=VXDCLS&cosd=1997-10-07&coed=2021-05-31"
 )
+download_with_http11_fallback <- function(url, destination) {
+  messages <- character()
+  status <- tryCatch(
+    withCallingHandlers(
+      utils::download.file(url, destination, mode = "wb", quiet = TRUE, method = "libcurl"),
+      warning = function(warning) {
+        messages <<- c(messages, conditionMessage(warning))
+        invokeRestart("muffleWarning")
+      }
+    ),
+    error = function(error) {
+      messages <<- c(messages, conditionMessage(error))
+      NA_integer_
+    }
+  )
+  if (identical(as.integer(status), 0L) && file.exists(destination) && file.info(destination)$size > 0) {
+    return("R download.file/libcurl")
+  }
+
+  if (file.exists(destination)) unlink(destination)
+  curl_binary <- unname(Sys.which("curl"))
+  if (!nzchar(curl_binary)) {
+    stop(
+      sprintf(
+        "FRED download failed and command-line curl is unavailable:\n%s",
+        paste(messages, collapse = "\n")
+      )
+    )
+  }
+
+  log_message("R/libcurl transfer failed; retrying FRED with curl over HTTP/1.1")
+  curl_output <- tryCatch(
+    system2(
+      curl_binary,
+      args = c(
+        "--fail", "--location", "--silent", "--show-error",
+        "--retry", "3", "--retry-connrefused", "--http1.1",
+        "--output", shQuote(destination), shQuote(url)
+      ),
+      stdout = TRUE,
+      stderr = TRUE
+    ),
+    error = function(error) structure(conditionMessage(error), status = 1L)
+  )
+  curl_status <- attr(curl_output, "status")
+  if (is.null(curl_status)) curl_status <- 0L
+  if (identical(as.integer(curl_status), 0L) && file.exists(destination) && file.info(destination)$size > 0) {
+    return("command-line curl --http1.1")
+  }
+  stop(
+    sprintf(
+      "FRED download failed with both R/libcurl and command-line curl.\nR/libcurl: %s\ncurl: %s",
+      paste(messages, collapse = " | "),
+      paste(curl_output, collapse = " | ")
+    )
+  )
+}
+
+fred_transport <- "cached local file"
 if (refresh || !file.exists(vxd_path)) {
   log_message("Downloading VXDCLS from FRED")
   raw_fred <- tempfile(tmpdir = cache_dir, fileext = ".csv")
-  utils::download.file(fred_url, raw_fred, mode = "wb", quiet = TRUE)
+  fred_transport <- download_with_http11_fallback(fred_url, raw_fred)
   vxd_source <- data.table::fread(raw_fred, na.strings = c(".", "NA", ""), showProgress = FALSE)
   unlink(raw_fred)
   if (!all(c("observation_date", "VXDCLS") %in% names(vxd_source))) {
@@ -227,12 +286,12 @@ supplemental <- data.table::data.table(
   SecurityID = c("108105", "102480", "102456", "102434"),
   Ticker = c("SPX", "NDX", "DJX", "RUT"),
   Date = supplement_date,
-  ClosePrice = c(
+  ClosePrice = round(c(
     close_on("^GSPC", supplement_date),
     close_on("^NDX", supplement_date),
-    round(djia_close / 100, 2),
+    djia_close / 100,
     close_on("^RUT", supplement_date)
-  ),
+  ), 2),
   Source = c("Yahoo Finance", "Yahoo Finance", "CRAN stevedata 1.8.0", "Yahoo Finance")
 )
 ensure_directory(dirname(supplemental_path))
@@ -265,11 +324,12 @@ report <- list(
   vxd = list(
     source = "Federal Reserve Bank of St. Louis FRED series VXDCLS; originating source Cboe",
     source_url = fred_url,
+    transport = fred_transport,
     output_range = series_range(vxd),
     output = file_fingerprint(vxd_path)
   ),
   supplemental_closes = list(
-    transformation = "Yahoo closes; DJIA divided by 100 and rounded to two decimals for DJX",
+    transformation = "Yahoo closes and the DJIA close divided by 100, all rounded to two decimal places",
     output = file_fingerprint(supplemental_path)
   )
 )

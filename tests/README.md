@@ -9,8 +9,10 @@ Rscript tests/run_tests.R
 These checks parse every R source file, verify the distributed Oxford-Man subset
 by SHA-256, confirm that source-retrieved auxiliary files remain outside Git,
 validate the machine-readable OptionMetrics input contract, confirm that
-every covered exhibit has a paper-value target, and run the public-source leak
-checks. They also scan the exact Git index, reachable history, and any unreachable
+every covered exhibit has a paper-value target, exercise BOM-safe CSV reading
+and platform-neutral Step 1 fingerprints, execute hand-verifiable tests of the
+portfolio, return, pricing, and margin formulas, and run the public-source leak checks.
+They also scan the exact Git index, reachable history, and any unreachable
 local blobs for OptionMetrics rows, raw schemas, credentials, personal paths,
 archives, and opaque binary content.
 

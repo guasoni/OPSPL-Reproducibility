@@ -27,7 +27,7 @@ if ! command -v docker >/dev/null 2>&1; then
 fi
 
 script_directory="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
-image_name="option-portfolio-selection-repro:4.3.2"
+image_name="opspl-reproducibility:4.3.2"
 operation="reproduce"
 data_directory=""
 container_arguments=()
@@ -85,11 +85,20 @@ fi
 
 docker build --pull --tag "$image_name" "$script_directory"
 
+# When the launcher itself is invoked with sudo because the Docker daemon is
+# root-managed, write mounted outputs as the original WSL user rather than root.
+host_uid="${SUDO_UID:-$(id -u)}"
+host_gid="${SUDO_GID:-$(id -g)}"
+if [[ ! "$host_uid" =~ ^[0-9]+$ || ! "$host_gid" =~ ^[0-9]+$ ]]; then
+  echo "Could not determine a numeric host user/group for the container." >&2
+  exit 2
+fi
+
 docker_arguments=(
   run
   --rm
   --init
-  --user "$(id -u):$(id -g)"
+  --user "${host_uid}:${host_gid}"
   --env HOME=/tmp
   --env RENV_PATHS_CACHE=/project/renv/cache
   --env RENV_PATHS_ROOT=/project/renv/local

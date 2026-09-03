@@ -4,6 +4,7 @@ root <- normalizePath(
   file.path(dirname(normalizePath(sub("^--file=", "", script_hit), winslash = "/")), ".."),
   winslash = "/"
 )
+source(file.path(root, "src", "R", "utils.R"), local = TRUE)
 
 failures <- character()
 check <- function(condition, message) {
@@ -33,6 +34,73 @@ if (file.exists(contract_path)) {
   check(all(nzchar(contract$required_columns)), "Raw-input contract has an empty column specification.")
   check(all(grepl("^[0-9a-f]{64}$", contract$paper_vintage_sha256)), "Paper-vintage raw hashes are malformed.")
 }
+
+step1_fingerprint_path <- file.path(root, "expected", "step1_paper_vintage_fingerprints.csv")
+check(file.exists(step1_fingerprint_path), "Missing expected/step1_paper_vintage_fingerprints.csv")
+if (file.exists(step1_fingerprint_path)) {
+  step1_fingerprints <- read.csv(step1_fingerprint_path, stringsAsFactors = FALSE, check.names = FALSE)
+  check(
+    identical(
+      names(step1_fingerprints),
+      c("file", "rows", "canonical_bytes", "canonical_sha256", "legacy_bytes", "legacy_sha256")
+    ),
+    "Step 1 fingerprint contract does not distinguish canonical content from legacy bytes."
+  )
+  check(all(step1_fingerprints$rows > 0), "Step 1 fingerprint contract contains an invalid row count.")
+  check(all(step1_fingerprints$canonical_bytes > 0), "Step 1 canonical byte counts are invalid.")
+  check(
+    all(grepl("^[0-9a-f]{64}$", step1_fingerprints$canonical_sha256)),
+    "Step 1 canonical hashes are malformed."
+  )
+  check(
+    all(grepl("^[0-9a-f]{64}$", step1_fingerprints$legacy_sha256)),
+    "Step 1 legacy hashes are malformed."
+  )
+}
+
+bom_fixture <- tempfile(fileext = ".csv")
+writeBin(
+  c(as.raw(c(0xEF, 0xBB, 0xBF)), charToRaw("SecurityID,Date\r\n108105,2020-01-01\r\n")),
+  bom_fixture
+)
+bom_connection <- file(bom_fixture, open = "rb")
+bom_lines <- readLines(bom_connection, warn = FALSE)
+close(bom_connection)
+unlink(bom_fixture)
+bom_header <- strip_utf8_bom(bom_lines[[1L]])
+bom_table <- data.table::fread(
+  text = paste(c(bom_header, bom_lines[-1L]), collapse = "\n"),
+  showProgress = FALSE
+)
+check(
+  identical(bom_header, "SecurityID,Date") &&
+    identical(names(bom_table), c("SecurityID", "Date")) &&
+    nrow(bom_table) == 1L,
+  "Binary CSV streaming does not handle a UTF-8 BOM under the C locale."
+)
+
+canonical_lf <- tempfile(fileext = ".csv")
+canonical_crlf <- tempfile(fileext = ".csv")
+canonical_perturbed <- tempfile(fileext = ".csv")
+canonical_distinct <- tempfile(fileext = ".csv")
+writeBin(charToRaw("value,label\n1,quoted\n"), canonical_lf)
+writeBin(charToRaw("value,label\r\n1.0,quoted\r\n"), canonical_crlf)
+writeBin(charToRaw("value,label\n1.0000000000004,quoted\n"), canonical_perturbed)
+writeBin(charToRaw("value,label\n1.000000002,quoted\n"), canonical_distinct)
+fingerprint_lf <- canonical_csv_fingerprint(canonical_lf)
+fingerprint_crlf <- canonical_csv_fingerprint(canonical_crlf)
+fingerprint_perturbed <- canonical_csv_fingerprint(canonical_perturbed)
+fingerprint_distinct <- canonical_csv_fingerprint(canonical_distinct)
+unlink(c(canonical_lf, canonical_crlf, canonical_perturbed, canonical_distinct))
+check(
+  identical(fingerprint_lf$sha256, fingerprint_crlf$sha256) &&
+    identical(fingerprint_lf$sha256, fingerprint_perturbed$sha256),
+  "Canonical CSV fingerprints depend on line endings or immaterial numeric serialization."
+)
+check(
+  !identical(fingerprint_lf$sha256, fingerprint_distinct$sha256),
+  "Canonical CSV fingerprints conceal a material numeric difference."
+)
 
 removed_auxiliary_archives <- file.path(
   root,
@@ -79,6 +147,23 @@ if (file.exists(launcher_path)) {
   check(
     grepl("Rscript src/scripts/bootstrap.R", launcher, fixed = TRUE),
     "The WSL2 launcher must restore locked packages before maintenance checks."
+  )
+  check(
+    grepl("SUDO_UID", launcher, fixed = TRUE) && grepl("SUDO_GID", launcher, fixed = TRUE),
+    "The WSL2 launcher must preserve the invoking user when run through sudo."
+  )
+}
+
+acquisition_path <- file.path(root, "src", "scripts", "acquire_auxiliary_data.R")
+if (file.exists(acquisition_path)) {
+  acquisition <- paste(readLines(acquisition_path, warn = FALSE, encoding = "UTF-8"), collapse = "\n")
+  check(
+    grepl("--http1.1", acquisition, fixed = TRUE),
+    "The FRED acquisition must provide an HTTP/1.1 transport fallback."
+  )
+  check(
+    grepl("ClosePrice = round(c(", acquisition, fixed = TRUE),
+    "Every supplemental January 2021 index close must be rounded to quoted precision."
   )
 }
 if (file.exists(dockerignore_path)) {
@@ -144,6 +229,7 @@ run_check <- function(script, arguments) {
 }
 
 run_check("src/scripts/00_verify_inputs.R", c("--config", shQuote(file.path(root, "config", "config.example.R")), "--public-only"))
+run_check("tests/test_method_formulas.R", character())
 run_check("src/scripts/06_validate_release.R", "--source-only")
 run_check("src/scripts/07_audit_public_tree.R", character())
 

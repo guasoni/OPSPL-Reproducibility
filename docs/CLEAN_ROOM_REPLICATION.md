@@ -1,5 +1,9 @@
 # Clean-room replication protocol and report
 
+The `v1.0.0` separate-machine outcome is recorded concisely in
+[`CLEAN_MACHINE_REPORT.md`](CLEAN_MACHINE_REPORT.md). This file remains the
+protocol and report template for future releases or independent replications.
+
 ## Objective
 
 The clean-room test determines whether a researcher can start from the release

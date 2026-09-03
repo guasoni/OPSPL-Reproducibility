@@ -10,7 +10,7 @@ repository's Git history.
 | Release stage | Audited source logic | Release treatment |
 |---|---|---|
 | `acquire_auxiliary_data.R` | Yahoo download calls and archived Bloomberg-era inputs | Executable source boundary: Yahoo is retrieved directly, long DJIA comes from checksum-pinned CRAN `stevedata`, and VXD comes from FRED; no Bloomberg file is distributed |
-| `01_build_step1.R` | `loadinR.R`; `Multiunderlying Preprocess.R` | Streaming R implementation; byte-identical across all four archived Step 1 files, with an independent `1e-12` imported-cell check |
+| `01_build_step1.R` | `loadinR.R`; `Multiunderlying Preprocess.R` | BOM-safe streaming R implementation; exact canonical table fingerprints across all four archived Step 1 files, with legacy byte hashes retained as provenance |
 | `02_filter_options.R` | Three index-specific Step 2 scripts | Consolidated parameterized R implementation; source-retrieved Yahoo input; exact archived row retention under the audited source vintage |
 | `03_build_auxiliary_inputs.R` | `Volatility.R` and its historical-return construction | R-only reconstruction from downloaded Yahoo/DJIA/VXD series and the distributed minimum Oxford-Man subset; source-vintage differences are measured explicitly |
 | `03_attach_forecasts.R` | Step 3 hand-off | Date-keyed attachment of the rebuilt business-day and volatility-forecast records |

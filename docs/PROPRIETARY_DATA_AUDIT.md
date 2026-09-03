@@ -8,9 +8,9 @@ fingerprints, software, synthetic observations, and low-dimensional values
 published in the paper, but no OptionMetrics observation and no row-level
 OptionMetrics derivative.
 
-This result does not yet authorize a public release because the clean-room
-replication has not yet been recorded. The earlier Yahoo/Bloomberg/FRED
-redistribution blockers have been removed from the candidate tree.
+The earlier Yahoo/Bloomberg/FRED redistribution blockers have been removed from
+the candidate tree. The separate-machine reproduction is recorded in
+`docs/CLEAN_MACHINE_REPORT.md`.
 
 ## Scope and method
 
@@ -88,5 +88,5 @@ determination are recorded in `data/public/provenance.csv` and
 
 The strict OptionMetrics audit is complete and passes, and the auxiliary files
 that lacked a redistribution basis have been replaced by executable acquisition
-steps. The repository should remain private/local until the clean-room run and
-the exact-commit/archive scans pass.
+steps. Publication additionally requires the exact final-commit and downloadable-
+archive scans in `docs/RELEASE_CHECKLIST.md`.

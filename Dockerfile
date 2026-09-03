@@ -5,7 +5,7 @@ FROM rocker/r-ver:4.3.2@sha256:4e32addfc4da3e660f6e0d05ce5e43d3eceb9db58a60b9a14
 
 LABEL org.opencontainers.image.title="Option Portfolio Selection reproducibility environment" \
       org.opencontainers.image.description="R 4.3.2 execution environment for the JEF reproducibility package" \
-      org.opencontainers.image.source="https://github.com/guasoni/Option-Portfolio-Selection-Reproducibility"
+      org.opencontainers.image.source="https://github.com/guasoni/OPSPL-Reproducibility"
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \

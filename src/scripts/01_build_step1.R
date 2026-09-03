@@ -72,9 +72,12 @@ raw_cache_signature <- function(path) {
 }
 
 stream_csv <- function(path, select = NULL, callback, expected_columns = NULL) {
-  connection <- file(path, open = "rt", encoding = "UTF-8")
+  # Read bytes rather than asking the current locale to transcode a 9 GB file.
+  # This accepts a UTF-8 BOM even when the reproducibility environment uses the
+  # deterministic C locale.
+  connection <- file(path, open = "rb")
   on.exit(close(connection), add = TRUE)
-  header_line <- readLines(connection, n = 1L, warn = FALSE)
+  header_line <- strip_utf8_bom(readLines(connection, n = 1L, warn = FALSE))
   if (length(header_line) != 1L) stop(sprintf("Empty CSV: %s", path))
   header <- names(data.table::fread(text = header_line, nrows = 0L, showProgress = FALSE))
   if (!is.null(expected_columns) && !identical(header, expected_columns)) {

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="600" viewBox="0 0 1500 600" role="img" aria-labelledby="title description">
+<title id="title">Reproducible option portfolio workflow</title>
+<desc id="description">Licensed and public inputs pass through validation, monthly sample construction, filtering and forecasting, position-limited optimization, and numerical validation. A public synthetic fixture exercises the same computational path.</desc>
+<defs>
+  <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#44546A"/></marker>
+  <style>
+    .title { font: 700 30px Arial, sans-serif; fill: #172B4D; }
+    .subtitle { font: 16px Arial, sans-serif; fill: #44546A; }
+    .box-title { font: 700 17px Arial, sans-serif; fill: #172B4D; }
+    .box-copy { font: 14px Arial, sans-serif; fill: #253858; }
+    .arrow { stroke: #44546A; stroke-width: 3; fill: none; marker-end: url(#arrowhead); }
+    .label { font: 700 13px Arial, sans-serif; fill: #6B778C; letter-spacing: 1px; }
+  </style>
+</defs>
+<rect width="1500" height="600" fill="#FFFFFF"/>
+<text x="750" y="45" class="title" text-anchor="middle">Reproducible option portfolio workflow</text>
+<text x="750" y="75" class="subtitle" text-anchor="middle">One R entry point · licensed observations remain outside the public repository</text>
+<text x="45" y="125" class="label">INPUTS</text>
+<rect x="35" y="145" width="235" height="125" rx="15" fill="#FFF3E0" stroke="#D97706" stroke-width="2"/>
+<text x="152.5" y="178.0" class="box-title" text-anchor="middle">Licensed OptionMetrics</text>
+<text x="152.5" y="205.0" class="box-copy" text-anchor="middle">three documented exports</text>
+<text x="152.5" y="227.0" class="box-copy" text-anchor="middle">quotes · index prices · rates</text>
+<rect x="35" y="330" width="235" height="125" rx="15" fill="#E8F3FF" stroke="#1976D2" stroke-width="2"/>
+<text x="152.5" y="363.0" class="box-title" text-anchor="middle">Public auxiliary sources</text>
+<text x="152.5" y="390.0" class="box-copy" text-anchor="middle">Yahoo · pinned CRAN DJIA</text>
+<text x="152.5" y="412.0" class="box-copy" text-anchor="middle">FRED VXD · Oxford-Man subset</text>
+<rect x="325" y="235" width="190" height="135" rx="15" fill="#F4F5F7" stroke="#6B778C" stroke-width="2"/>
+<text x="420.0" y="268.0" class="box-title" text-anchor="middle">Input controls</text>
+<text x="420.0" y="295.0" class="box-copy" text-anchor="middle">schemas and dates</text>
+<text x="420.0" y="317.0" class="box-copy" text-anchor="middle">fingerprints and provenance</text>
+<text x="420.0" y="339.0" class="box-copy" text-anchor="middle">private-data boundary</text>
+<rect x="575" y="235" width="175" height="135" rx="15" fill="#E9F7EF" stroke="#238636" stroke-width="2"/>
+<text x="662.5" y="268.0" class="box-title" text-anchor="middle">Step 1</text>
+<text x="662.5" y="295.0" class="box-copy" text-anchor="middle">monthly expirations</text>
+<text x="662.5" y="317.0" class="box-copy" text-anchor="middle">underlying and rates</text>
+<text x="662.5" y="339.0" class="box-copy" text-anchor="middle">canonical checks</text>
+<rect x="810" y="235" width="185" height="135" rx="15" fill="#E9F7EF" stroke="#238636" stroke-width="2"/>
+<text x="902.5" y="268.0" class="box-title" text-anchor="middle">Prepare scenarios</text>
+<text x="902.5" y="295.0" class="box-copy" text-anchor="middle">parity filtering</text>
+<text x="902.5" y="317.0" class="box-copy" text-anchor="middle">volatility forecasts</text>
+<text x="902.5" y="339.0" class="box-copy" text-anchor="middle">bid-ask returns</text>
+<rect x="1055" y="235" width="185" height="135" rx="15" fill="#F3EEFF" stroke="#7E57C2" stroke-width="2"/>
+<text x="1147.5" y="268.0" class="box-title" text-anchor="middle">Optimize</text>
+<text x="1147.5" y="295.0" class="box-copy" text-anchor="middle">position limit</text>
+<text x="1147.5" y="317.0" class="box-copy" text-anchor="middle">optional solvency</text>
+<text x="1147.5" y="339.0" class="box-copy" text-anchor="middle">margin diagnostic</text>
+<rect x="1300" y="235" width="165" height="135" rx="15" fill="#FFF0F6" stroke="#C2185B" stroke-width="2"/>
+<text x="1382.5" y="268.0" class="box-title" text-anchor="middle">Validate outputs</text>
+<text x="1382.5" y="295.0" class="box-copy" text-anchor="middle">tables and wealth</text>
+<text x="1382.5" y="317.0" class="box-copy" text-anchor="middle">constraints</text>
+<text x="1382.5" y="339.0" class="box-copy" text-anchor="middle">paper tolerances</text>
+<rect x="325" y="440" width="190" height="105" rx="15" fill="#E8F3FF" stroke="#1976D2" stroke-width="2"/>
+<text x="420.0" y="473.0" class="box-title" text-anchor="middle">Synthetic fixture</text>
+<text x="420.0" y="500.0" class="box-copy" text-anchor="middle">generated public inputs</text>
+<text x="420.0" y="522.0" class="box-copy" text-anchor="middle">46 integration checks</text>
+<path d="M 270 207 L 325 270" class="arrow"/>
+<path d="M 270 392 L 325 335" class="arrow"/>
+<path d="M 515 302 L 575 302" class="arrow"/>
+<path d="M 750 302 L 810 302" class="arrow"/>
+<path d="M 995 302 L 1055 302" class="arrow"/>
+<path d="M 1240 302 L 1300 302" class="arrow"/>
+<path d="M 515 492 L 662 370" class="arrow" stroke-dasharray="8 6"/>
+<text x="750" y="575" class="subtitle" text-anchor="middle">Rscript reproduce.R  →  data construction  →  portfolio results  →  numerical and provenance checks</text>
+</svg>

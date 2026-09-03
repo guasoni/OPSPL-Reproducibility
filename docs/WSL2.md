@@ -34,7 +34,7 @@ Create both the clone and a separate private data directory inside the Linux
 filesystem, for example:
 
 ```text
-~/Option-Portfolio-Selection-Reproducibility
+~/OPSPL-Reproducibility
 ~/private/optionmetrics-paper-vintage
 ```
 
@@ -61,8 +61,8 @@ Before public release, authenticate to GitHub from WSL and clone the private
 candidate directly:
 
 ```text
-git clone https://github.com/guasoni/Option-Portfolio-Selection-Reproducibility.git
-cd Option-Portfolio-Selection-Reproducibility
+git clone https://github.com/guasoni/OPSPL-Reproducibility.git
+cd OPSPL-Reproducibility
 git status --short
 git rev-parse HEAD
 ```
@@ -95,6 +95,10 @@ The Docker build context excludes everything except `Dockerfile`, so neither the
 source tree nor any accidentally adjacent data is copied into an image layer.
 At runtime the repository is mounted read/write for ignored outputs, while the
 OptionMetrics directory is mounted read-only at `/optionmetrics`.
+If Docker access on a root-managed WSL installation requires `sudo`, the
+launcher detects `SUDO_UID` and `SUDO_GID` so generated files still belong to
+the invoking user. Installing the user in Docker's authorized group remains the
+preferred long-term setup.
 
 ## Evidence to retain
 

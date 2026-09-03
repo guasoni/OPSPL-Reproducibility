@@ -23,5 +23,15 @@
 - Add an optional WSL2 container launcher with a digest-pinned Rocker R 4.3.2
   base, read-only licensed-data mount, minimal Docker build context, and a
   documented clean-machine protocol.
+- Harden the clean-machine workflow after its first WSL2 run: accept a UTF-8 BOM
+  without locale intervention, canonicalize Step 1 content fingerprints, round
+  supplemental quoted closes consistently, retry FRED over HTTP/1.1, and retain
+  the invoking WSL user when Docker is run through `sudo`.
+- Normalize canonical Step 1 numeric fields at ten decimal places so harmless
+  cross-platform floating-point serialization cannot fail an exact content check.
+- Add hand-verifiable formula tests, a formal method specification, a generated
+  workflow figure, a clean-machine evidence summary, provisional CRediT roles,
+  and a MethodsX resource map.
+- Adopt the shorter repository name `OPSPL-Reproducibility` before public release.
 
 The version becomes released only when the public Git tag and archival deposit are created.

@@ -5,8 +5,8 @@
 .Rprofile text eol=lf
 *.R text eol=lf
 *.md text eol=lf
-# CSV inputs are fingerprinted byte-for-byte. Git must neither convert nor diff
-# their line endings; the files remain ordinary CSV for R and spreadsheet tools.
+# Tracked CSV inputs retain their deposited bytes. Generated Step 1 files use a
+# separate canonical table-content fingerprint for cross-platform validation.
 *.csv binary
 *.sql text eol=lf
 *.json text eol=lf

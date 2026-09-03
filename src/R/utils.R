@@ -99,6 +99,77 @@ sha256_file <- function(path) {
   digest::digest(file = path, algo = "sha256", serialize = FALSE)
 }
 
+strip_utf8_bom <- function(line) {
+  if (!length(line) || is.na(line[[1L]])) return(line)
+  bytes <- charToRaw(line[[1L]])
+  bom <- as.raw(c(0xEF, 0xBB, 0xBF))
+  if (length(bytes) >= 3L && identical(bytes[seq_len(3L)], bom)) {
+    line[[1L]] <- rawToChar(bytes[-seq_len(3L)])
+  }
+  line
+}
+
+canonical_csv_fingerprint <- function(path) {
+  require_packages(c("data.table", "digest"))
+  assert_file(path, "CSV to fingerprint")
+  frame <- data.table::fread(
+    path,
+    na.strings = c("NA"),
+    showProgress = FALSE
+  )
+
+  # A content fingerprint must not depend on line endings, CSV quoting, or
+  # sub-machine-precision differences in floating-point serialization.  Ten
+  # fixed decimal places retain a substantially tighter comparison than any
+  # downstream numerical tolerance while normalizing the approximately 1e-13
+  # differences observed between the locked Windows and Linux R builds.
+  canonical_column <- function(value) {
+    if (inherits(value, "Date")) return(format(value, "%Y-%m-%d"))
+    if (inherits(value, c("POSIXct", "POSIXlt"))) {
+      return(format(value, "%Y-%m-%dT%H:%M:%OS6Z", tz = "UTC"))
+    }
+    if (is.numeric(value)) {
+      value[is.finite(value) & abs(value) < 0.5e-10] <- 0
+      result <- formatC(
+        value,
+        format = "f",
+        digits = 10L,
+        decimal.mark = ".",
+        big.mark = "",
+        width = 0L
+      )
+      result[is.na(value)] <- NA_character_
+      return(result)
+    }
+    if (is.logical(value)) {
+      result <- ifelse(value, "TRUE", "FALSE")
+      result[is.na(value)] <- NA_character_
+      return(result)
+    }
+    enc2utf8(as.character(value))
+  }
+  canonical <- frame[, lapply(.SD, canonical_column)]
+
+  canonical_path <- tempfile(fileext = ".csv")
+  on.exit(unlink(canonical_path), add = TRUE)
+  data.table::fwrite(
+    canonical,
+    canonical_path,
+    quote = TRUE,
+    na = "NA",
+    eol = "\n",
+    logical01 = FALSE,
+    dateTimeAs = "write.csv"
+  )
+  info <- file.info(canonical_path)
+  list(
+    method = "typed-fixed-decimal-v2-10dp",
+    rows = nrow(frame),
+    bytes = unname(info$size),
+    sha256 = sha256_file(canonical_path)
+  )
+}
+
 file_fingerprint <- function(path, include_hash = TRUE) {
   info <- file.info(path)
   list(

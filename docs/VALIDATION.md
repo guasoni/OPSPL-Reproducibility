@@ -9,8 +9,8 @@ directories throughout the audit.
 
 The R builder streamed the 9.2 GB, 50,490,867-row paper-vintage option dump in
 two bounded-memory passes. It selected 1,194 security-expiration pairs across
-304 expirations. The resulting files were byte-identical to all four archived
-paper inputs:
+304 expirations. On the authors' Windows workstation the resulting files were
+byte-identical to all four archived paper inputs:
 
 | File | Rows | Result |
 |---|---:|---|
@@ -19,9 +19,12 @@ paper inputs:
 | `DJXfinal.csv` | 25,455 | SHA-256 exact |
 | `RUTfinal.csv` | 40,279 | SHA-256 exact |
 
-The exact hashes are in `expected/step1_paper_vintage_fingerprints.csv`; raw
-input hashes are in `expected/paper_vintage_raw_fingerprints.csv`. An independent
-R-import comparison also found no cell difference above `1e-12`.
+The legacy byte hashes and platform-neutral canonical table hashes are both in
+`expected/step1_paper_vintage_fingerprints.csv`; raw-input hashes are in
+`expected/paper_vintage_raw_fingerprints.csv`. The canonical hashes are the
+release gate. They normalize CSV syntax and represent numeric fields to ten
+decimal places, which removes operating-system serialization differences while
+remaining substantially stricter than the downstream numerical tolerances.
 
 ## Filtering and auxiliary-data attachment
 
@@ -106,3 +109,16 @@ error of `4.27e-14` relative to their stored values.
 This test establishes that the public code path operates without proprietary
 data. Because the fixture is non-empirical, it is not evidence that the paper's
 reported estimates can be recovered without the licensed OptionMetrics exports.
+
+## Separate-machine reproduction
+
+On 2026-09-02--03, the complete licensed-data workflow was run from a clean clone
+on a separate Windows/WSL2 computer using the pinned R 4.3.2 container. The run
+took 2 hours 51 minutes and completed every covered optimization. All paper-value
+groups passed the declared numerical policy, the synthetic fixture passed all 46
+checks, and the proprietary-data audit passed all 13 checks.
+
+The run exposed portability issues that were corrected before release and added
+to the public regression suite. A second complete licensed-data optimization was
+not performed after those corrections. The concise scope, outcome, and resulting
+qualification are recorded in [`CLEAN_MACHINE_REPORT.md`](CLEAN_MACHINE_REPORT.md).

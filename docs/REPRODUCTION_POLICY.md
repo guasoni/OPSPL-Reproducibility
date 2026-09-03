@@ -19,10 +19,15 @@ font rasterization or PDF bytes are not required.
 
 ## Current tolerances
 
-- Step 1 paper-vintage files: byte-identical under the locked R workflow, checked
-  against the four SHA-256 fingerprints in
-  `expected/step1_paper_vintage_fingerprints.csv`; the independent audit also
-  confirmed all imported cells at tolerance `1e-12`.
+- Step 1 paper-vintage files: exact row counts and canonical table-content
+  SHA-256 fingerprints under the locked R workflow, checked against
+  `expected/step1_paper_vintage_fingerprints.csv`. Canonicalization imports each
+  CSV, preserves types and row order, formats numeric fields to ten decimal
+  places, and writes a fixed LF-terminated representation. This normalizes
+  immaterial cross-platform floating-point serialization around `1e-13` while
+  detecting differences above the `1e-10` canonical precision. Historical
+  Windows byte hashes are retained for provenance but do not gate another
+  operating system.
 - Step 2 row selection: exact.
 - Step 2 parity-implied index levels from the source-current Yahoo retrieval:
   differences from the authors' archived download are recorded and propagated.

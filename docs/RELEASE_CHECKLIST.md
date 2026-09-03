@@ -22,11 +22,14 @@ passes.
 - [x] Deterministic synthetic integration run exercises the raw schemas, Step 1
       selection branches, filtering, forecasts, and every covered optimizer mode.
 - [x] Clean-room protocol and publication-safe report template documented.
-- [ ] Clean-machine run using only the repository and documented user inputs.
-- [ ] Final clean-machine report contains the candidate commit, environment,
-      commands, deviations, and aggregate validation outcomes only.
-- [ ] Independent operator recorded, or the result labelled accurately as a
-      clean-machine replication by an original developer.
+- [x] Complete separate-machine licensed-data run using only the repository and
+      documented user inputs.
+- [x] Publication-safe report records the candidate, environment, aggregate
+      outcomes, post-run portability hardening, and the absence of a second full run.
+- [x] Result labelled accurately as a clean-machine reproduction test, not an
+      independent replication.
+- [x] Formal method specification and hand-verifiable formula tests included.
+- [x] Reproducible workflow figure and MethodsX resource map included.
 
 ## Data and licensing
 
@@ -64,8 +67,8 @@ passes.
       read-only, and excludes the repository and data from the build context.
 - [x] Exact second-computer commands and evidence requirements documented.
 - [ ] Windows and Linux checks pass on the staged private GitHub repository.
-- [x] `v1.0.0` GitHub/Zenodo release metadata prepared without asserting a DOI
-      before the archive exists.
+- [x] `v1.0.0` GitHub release metadata prepared without asserting a DOI or Zenodo
+      deposit before either exists.
 - [ ] Citation metadata updated with the final journal citation and DOI.
 - [x] Licensed-data leak scan passes on the current staged release-candidate Git
       index.
@@ -74,5 +77,5 @@ passes.
 - [ ] Downloadable GitHub source archive inspected for the same data boundary.
 - [ ] Candidate first pushed to a private remote and all remote checks pass.
 - [ ] Public GitHub repository created only after the preceding checks pass.
-- [ ] Archival release and permanent DOI created after the public repository is
-      verified.
+- [ ] Optional archival DOI created later; intentionally not a condition for the
+      JEF proof link or initial GitHub release.

@@ -8,8 +8,8 @@ be copied into separate paper-specific repositories while both articles refer to
 the same computational method.
 
 Every scholarly citation must identify an immutable release rather than relying
-only on the moving `main` branch. Each public release is tagged in GitHub and
-archived in Zenodo:
+only on the moving `main` branch. Each public release is tagged in GitHub. If a
+later Zenodo deposit is created:
 
 - the Zenodo **version DOI** identifies the exact files used for a particular
   validation or article;
@@ -24,8 +24,8 @@ exists and has been verified.
 
 `v1.0.0` is reserved for the audited JEF reproduction scope stated in
 `docs/COVERAGE.md`. The tag is created only after the proprietary-data audit,
-clean-room replication, private-remote checks, and public-source archive review
-have passed.
+the documented separate-machine reproduction and post-run regression checks,
+private-remote checks, and public-source archive review have been completed.
 
 Later additions use a new version:
 
@@ -36,15 +36,18 @@ Later additions use a new version:
 - a major release changes an input contract, public interface, or substantive
   interpretation incompatibly.
 
-Any code or fixed-input change that could affect results requires the relevant
-numerical and clean-room checks to be repeated, regardless of version label.
+Future substantive code or fixed-input changes that could affect empirical
+results require the relevant numerical and clean-machine checks to be repeated,
+regardless of version label. The narrow post-test portability changes preceding
+`v1.0.0`, and the absence of a second complete licensed-data optimization after
+them, are disclosed in `docs/CLEAN_MACHINE_REPORT.md`.
 
 ## What to cite
 
 Before permanent identifiers are available, users should cite the accepted JEF
-article and identify the repository version and Git commit in prose. After the
-archives and companion article exist, the repository README and `CITATION.cff`
-will contain complete formatted references.
+article and identify the GitHub release and Git commit in prose. After an archive
+and companion article exist, the repository README and `CITATION.cff` will
+contain complete formatted references.
 
 The intended citation rule is:
 
